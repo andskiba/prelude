@@ -4,6 +4,24 @@
 
 ;;; Code:
 
+(defvar *as-org/agenda-sets*
+  '(("~/org/life.org" "~/org/misys/tasks.org")
+    ("~/org/life.org" "~/org/work.org")))
+(defvar *as-org/current-agenda-set* -1)
+(defun as-org/next-agenda-set ()
+  "Cycle through sets of agenda files by assigning `org-agenda-files'."
+  (interactive)
+  (setf *as-org/current-agenda-set*
+        (mod (+ *as-org/current-agenda-set* 1)
+             (length *as-org/agenda-sets*)))
+  (setf org-agenda-files (nth *as-org/current-agenda-set*
+                              *as-org/agenda-sets*))
+  (org-agenda-redo))
+
+(global-set-key (kbd "C-c m o n") 'as-org/next-agenda-set)
+
+;; Configuration
+
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
