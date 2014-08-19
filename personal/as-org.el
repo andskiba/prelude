@@ -5,7 +5,7 @@
 ;;; Code:
 
 (defvar *as-org/agenda-sets*
-  '(("~/org/life.org" "~/org/misys/tasks.org")
+  '(("~/org/life.org" "~/misys-org/tasks.org")
     ("~/org/life.org" "~/org/work.org")))
 (defvar *as-org/current-agenda-set* -1)
 (defun as-org/next-agenda-set ()
