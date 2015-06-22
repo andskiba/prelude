@@ -9,4 +9,6 @@
 
 (define-key global-map (kbd "C-c m w") 'web-mode)
 
+(define-key global-map (kbd "C-x o") 'ace-window)
+
 ;;; as-keys.el ends here

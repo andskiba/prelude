@@ -4,9 +4,17 @@
 
 ;;; Code:
 
-(defvar as-org/*repo* "d:/org")
+(defvar as-org/*repo-locations* '("d:/org" "~/org"))
+(defvar as-org/*repo* nil)
 (defvar as-org/*sync-buffer* "*org-sync*")
 (defvar as-org/*timer* nil)
+
+(defun as-org/set-org-repo ()
+  "Find where on the system the org repo is and set as-org/*repo*."
+  (dolist (loc as-org/*repo-locations*)
+    (let ((git-dir (concat loc "/.git")))
+      (if (file-exists-p git-dir)
+          (setq as-org/*repo* loc)))))
 
 (defun as-org/git-pull ()
   "Call a git pull command on the repository."
@@ -42,7 +50,9 @@
   (cancel-timer as-org/*timer*)
   (setq as-org/*timer* nil))
 
-(as-org/start)
+(as-org/set-org-repo)
+(if as-org/*repo*
+    (as-org/start))
 
 (provide 'as-org-sync)
 
