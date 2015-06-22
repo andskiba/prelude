@@ -1,6 +1,6 @@
 ;;; prelude-evil.el --- Emacs Prelude: evil-mode configuration.
 ;;
-;; Copyright © 2011-2013 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/prelude
@@ -75,6 +75,23 @@
 (define-key evil-normal-state-map
   (kbd "Y") 'prelude-yank-to-end-of-line)
 
+(defun prelude-shift-left-visual ()
+  "Shift left and restore visual selection."
+  (interactive)
+  (evil-shift-left (region-beginning) (region-end))
+  (evil-normal-state)
+  (evil-visual-restore))
+
+(defun prelude-shift-right-visual ()
+  "Shift right and restore visual selection."
+  (interactive)
+  (evil-shift-right (region-beginning) (region-end))
+  (evil-normal-state)
+  (evil-visual-restore))
+
+(define-key evil-visual-state-map (kbd ">") 'prelude-shift-right-visual)
+(define-key evil-visual-state-map (kbd "<") 'prelude-shift-left-visual)
+
 ;; Scrolling
 (defun prelude-evil-scroll-down-other-window ()
   (interactive)
@@ -105,8 +122,8 @@
 
 (setq evil-shift-width 2)
 
-;;; enable ace-jump mode with evil-mode
-(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+;;; enable avy with evil-mode
+(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-word-1)
 
 ;;; snagged from Eric S. Fraga
 ;;; http://lists.gnu.org/archive/html/emacs-orgmode/2012-05/msg00153.html
