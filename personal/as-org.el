@@ -18,6 +18,16 @@
                               *as-org/agenda-sets*))
   (org-agenda-redo))
 
+(defun as/set-org-keys ()
+  "Set my key bindings for `org-mode'."
+  (local-set-key (kbd "M-S-<down>") 'org-move-subtree-down)
+  (local-set-key (kbd "M-S-<up>") 'org-move-subtree-up))
+
+(add-hook 'org-mode-hook 'as/set-org-keys)
+
+(define-key prelude-mode-map (kbd "M-S-<down>") nil)
+(define-key prelude-mode-map (kbd "M-S-<up>") nil)
+
 (global-set-key (kbd "C-c m o n") 'as-org/next-agenda-set)
 
 ;; Configuration
