@@ -11,4 +11,6 @@
 
 (define-key global-map (kbd "C-x o") 'ace-window)
 
+(global-set-key [f6] 'ivy-resume)
+
 ;;; as-keys.el ends here

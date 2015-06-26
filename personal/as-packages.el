@@ -10,6 +10,7 @@
 (prelude-require-package 'psvn)
 (prelude-require-package 'ahg)
 (prelude-require-package 'indent-guide)
+(prelude-require-package 'counsel)
 
 ;; magit
 
