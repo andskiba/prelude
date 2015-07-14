@@ -4,6 +4,17 @@
 
 ;;; Code:
 
+;; Start org repository sync
+
+(require 'repo-sync)
+
+(setq repo-sync-repo-locations '("d:\\org" "~/org"))
+(setq repo-sync-save-buffers-pattern "^.*\.org$")
+
+(repo-sync-start)
+
+;; Org file sets
+
 (defvar *as-org/agenda-sets*
   '(("~/org/life.org" "~/misys-org/tasks.org")
     ("~/org/life.org" "~/org/work.org")))

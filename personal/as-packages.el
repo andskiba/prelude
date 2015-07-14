@@ -4,6 +4,11 @@
 
 ;;; Code:
 
+;; Playground
+
+
+;; Prelude
+
 (prelude-require-package 'php-mode)
 (prelude-require-package 'yasnippet)
 (prelude-require-package 'apache-mode)
