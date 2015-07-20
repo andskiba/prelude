@@ -7,6 +7,7 @@
 ;; Playground
 
 
+
 ;; Prelude
 
 (prelude-require-package 'php-mode)
@@ -17,9 +18,9 @@
 (prelude-require-package 'indent-guide)
 (prelude-require-package 'counsel)
 
-;; magit
+;; Magit
 
-(setq magit-last-seen-setup-instructions "1.4.0")
+(setq-default magit-last-seen-setup-instructions "1.4.0")
 
 ;; ahg
 
@@ -27,21 +28,21 @@
 
 ;; helm
 
-(setq helm-ff-skip-boring-files t)
+(setq-default helm-ff-skip-boring-files t)
 
 ;; web-mode
 
-(setq web-mode-code-indent-offset 2)
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
+(setq-default web-mode-code-indent-offset 2)
+(setq-default web-mode-markup-indent-offset 2)
+(setq-default web-mode-css-indent-offset 2)
 
 ;;; CSS modes
 
-(setq css-indent-offset 4)
+(setq-default css-indent-offset 4)
 
 ;;; JS mode
 
-(setq js-indent-level 2)
+(setq-default js-indent-level 2)
 
 ;; js2-mode
 
@@ -52,7 +53,7 @@
 (add-hook 'css-mode-hook 'skewer-css-mode)
 (add-hook 'html-mode-hook 'skewer-html-mode)
 
-(setq js2-basic-offset 2)
+(setq-default js2-basic-offset 2)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
