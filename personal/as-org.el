@@ -11,7 +11,7 @@
 (setq repo-sync-repo-locations '("d:\\org" "~/org"))
 (setq repo-sync-save-buffers-pattern "^.*\.org$")
 
-(repo-sync-start)
+;; (repo-sync-start)
 
 ;; Org file sets
 
