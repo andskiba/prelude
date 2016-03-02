@@ -6,6 +6,10 @@
 
 (require 'cl-lib)
 
+;; Setup proxy for Nordea
+
+;; TODO: Write something to read proxy from file
+
 ;; Make flycheck use regular `load-path' for `require' calls in elisp
 
 (setq-default flycheck-emacs-lisp-load-path 'inherit)

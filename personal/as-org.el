@@ -11,7 +11,13 @@
 (setq repo-sync-repo-locations '("d:\\org" "~/org"))
 (setq repo-sync-save-buffers-pattern "^.*\.org$")
 
-(repo-sync-start)
+;; (repo-sync-start)
+
+(require 'use-package)
+
+(use-package org
+  :config
+  (add-to-list 'org-file-apps '("\\.xlsx?" . default)))
 
 ;; Org file sets
 
@@ -58,7 +64,8 @@
 (setq org-startup-folded t)
 
 (defun org-summary-todo (n-done n-not-done)
-  "Switch entry to 'done' when all subentries are done, to 'todo' otherwise."
+  "Switch entry to 'done' when all sub-entries are done, to 'todo' otherwise.
+N-DONE number of done entries.  N-NOT-DONE number of entries not done."
   (let (org-log-done org-log-states)    ; turn off logging
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 

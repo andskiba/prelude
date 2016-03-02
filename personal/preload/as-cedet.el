@@ -4,7 +4,9 @@
 
 ;;; Code:
 
-(load-file "d:/projects/emacs/cedet/cedet-devel-load.el")
+(let ((cedet-path "d:/projects/emacs/cedet/cedet-devel-load.el"))
+  (if (file-exists-p cedet-path)
+      (load-file cedet-path)))
 
 (provide 'as-cedet)
 

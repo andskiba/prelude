@@ -10,6 +10,7 @@
 
 ;; Prelude
 
+(prelude-require-package 'use-package)
 (prelude-require-package 'php-mode)
 (prelude-require-package 'yasnippet)
 (prelude-require-package 'apache-mode)
@@ -17,6 +18,17 @@
 (prelude-require-package 'ahg)
 (prelude-require-package 'indent-guide)
 (prelude-require-package 'counsel)
+(prelude-require-package 'ledger-mode)
+
+;; Yasnippet
+
+(require 'yasnippet)
+(add-to-list 'yas-snippet-dirs
+             (concat prelude-personal-dir "/snippets"))
+
+;; String inflection
+
+(require 'string-inflection)
 
 ;; Magit
 
