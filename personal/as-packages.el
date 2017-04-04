@@ -19,6 +19,8 @@
 (prelude-require-package 'indent-guide)
 (prelude-require-package 'counsel)
 (prelude-require-package 'ledger-mode)
+(prelude-require-package 'multiple-cursors)
+(prelude-require-package 'ht)
 
 ;; Yasnippet
 
@@ -71,6 +73,47 @@
 
 (js2-imenu-extras-mode)
 
+;;; Typescript
+
+(prelude-require-package 'tide)
+(require 'company)
+(require 'flycheck)
+(require 'tide)
+(require 'ht)
+
+(defun setup-tide-mode ()
+  "Setup tide-mode."
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;; format options
+(setq typescript-indent-level 2)
+(setq tide-format-options
+      (ht->plist
+       (ht (:insertSpaceAfterFunctionKeywordForAnonymousFunctions t)
+           (:placeOpenBraceOnNewLineForFunctions nil))))
+
+;;; SQL
+
+(add-to-list 'auto-mode-alist '("\\.pk[bs]\\'" . sql-mode))
+
+
 ;;; Indent-guide
 
 (require 'indent-guide)
@@ -78,12 +121,14 @@
 
 ;;; Java
 
-(add-hook 'after-init-hook
-          (lambda ()
-            (message "activate-malabar-mode")
-            (activate-malabar-mode)))
 
-(add-hook 'malabar-java-mode-hook 'flycheck-mode)
-(add-hook 'malabar-groovy-mode-hook 'flycheck-mode)
+(when (fboundp 'activate-malabar-mode)
+  (add-hook 'after-init-hook
+            (lambda ()
+              (message "activate-malabar-mode")
+              (activate-malabar-mode)))
+  (add-hook 'malabar-java-mode-hook 'flycheck-mode)
+  (add-hook 'malabar-groovy-mode-hook 'flycheck-mode))
+
 
 ;;; as-packages.el ends here

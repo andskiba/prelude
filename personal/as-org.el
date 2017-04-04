@@ -38,7 +38,8 @@
 (defun as/set-org-keys ()
   "Set my key bindings for `org-mode'."
   (local-set-key (kbd "M-S-<down>") 'org-move-subtree-down)
-  (local-set-key (kbd "M-S-<up>") 'org-move-subtree-up))
+  (local-set-key (kbd "M-S-<up>") 'org-move-subtree-up)
+  (local-set-key (kbd "C-c m o i") 'org-time-stamp-inactive))
 
 (add-hook 'org-mode-hook 'as/set-org-keys)
 
