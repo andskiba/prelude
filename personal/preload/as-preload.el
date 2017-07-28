@@ -20,7 +20,8 @@
   "Get directory from which Emacs was run."
   (let ((emacs-bin default-directory))
     (cl-reduce (lambda (a b) (concat a "/" b))
-	       (butlast (split-string emacs-bin "\\\\") 1))))
+	       (butlast (split-string emacs-bin "\\\\") 1)
+	       :initial-value "")))
 
 (defvar emacs-location (as-preload--emacs-dir))
 

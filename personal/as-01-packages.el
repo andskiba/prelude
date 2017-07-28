@@ -11,6 +11,7 @@
 ;; Prelude
 
 (prelude-require-package 'use-package)
+(prelude-require-package 'company)
 (prelude-require-package 'php-mode)
 (prelude-require-package 'yasnippet)
 (prelude-require-package 'apache-mode)
