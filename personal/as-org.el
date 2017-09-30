@@ -64,6 +64,8 @@
 (setq org-hide-leading-stars t)
 (setq org-startup-folded t)
 
+(setq org-list-description-max-indent 5)
+
 (defun org-summary-todo (n-done n-not-done)
   "Switch entry to 'done' when all sub-entries are done, to 'todo' otherwise.
 N-DONE number of done entries.  N-NOT-DONE number of entries not done."
