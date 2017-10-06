@@ -22,6 +22,7 @@
 (prelude-require-package 'ledger-mode)
 (prelude-require-package 'multiple-cursors)
 (prelude-require-package 'ht)
+(prelude-require-package 'markdown-mode)
 
 ;; Yasnippet
 
