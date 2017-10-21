@@ -1,0 +1,15 @@
+#name: new-package
+#key: new-package
+#key: np
+# --
+;;; ${1:package}.el --- ${2:Summary}
+
+;;; Commentary:
+
+;;; Code:
+
+$0
+
+(provide '$1)
+
+;;; $1.el ends here
