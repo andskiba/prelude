@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-(set-face-attribute 'default nil :font "Consolas-12")
+(set-face-attribute 'default nil :font "DejaVu Sans Mono-12")
 
 (disable-theme 'zenburn)
 (load-theme 'deeper-blue)

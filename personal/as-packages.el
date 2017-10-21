@@ -17,6 +17,18 @@
 (prelude-require-package 'ahg)
 (prelude-require-package 'indent-guide)
 (prelude-require-package 'counsel)
+(prelude-require-package 'use-package)
+(prelude-require-package 'ledger-mode)
+
+;; Ledger
+
+(eval-when-compile
+  (require 'use-package))
+
+(use-package ledger-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
+  (setq ledger-post-account-alignment-column 2))
 
 ;; Magit
 
@@ -59,6 +71,33 @@
 
 (js2-imenu-extras-mode)
 
+;;; Typescript
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;; format options
+(setq tide-format-options
+      '(:insertSpaceAfterFunctionKeywordForAnonymousFunctions t
+        :placeOpenBraceOnNewLineForFunctions nil))
+
 ;;; Indent-guide
 
 (require 'indent-guide)
@@ -66,10 +105,11 @@
 
 ;;; Java
 
-(add-hook 'after-init-hook
-          (lambda ()
-            (message "activate-malabar-mode")
-            (activate-malabar-mode)))
+(when (fboundp 'activate-malabar-mode)
+  (add-hook 'after-init-hook
+            (lambda ()
+              (message "activate-malabar-mode")
+              (activate-malabar-mode))))
 
 (add-hook 'malabar-java-mode-hook 'flycheck-mode)
 (add-hook 'malabar-groovy-mode-hook 'flycheck-mode)
