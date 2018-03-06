@@ -27,6 +27,11 @@
 (eval-when-compile
   (require 'use-package))
 
+;; encryption
+
+(require 'epa-file)
+(epa-file-enable)
+
 ;; Ledger
 
 (use-package ledger-mode

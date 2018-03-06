@@ -19,6 +19,15 @@
   :config
   (add-to-list 'org-file-apps '("\\.xlsx?" . default)))
 
+;; Encryption
+
+(require 'org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+;; GPG key to use for encryption
+;; Either the Key ID or set to nil to use symmetric encryption.
+;; (setq org-crypt-key nil)
+
 ;; Org file sets
 
 (defvar *as-org/agenda-sets*
@@ -113,7 +122,7 @@ N-DONE number of done entries.  N-NOT-DONE number of entries not done."
    (python . t)
    (ruby . t)
    (screen . nil)
-   (sh . t)
+   ;; (sh . t)
    (sql . nil)
    (sqlite . nil)))
 
