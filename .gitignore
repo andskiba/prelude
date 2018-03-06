@@ -27,3 +27,4 @@ abbrev_defs
 .emacs.desktop
 .emacs.desktop.lock
 network-security.data
+.mc-lists.el
