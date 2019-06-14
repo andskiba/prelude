@@ -16,6 +16,7 @@
 
 (disable-theme 'zenburn)
 (load-theme 'deeper-blue)
+;; (disable-theme 'deeper-blue)
 
 (provide 'as-theme)
 
