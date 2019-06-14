@@ -126,4 +126,30 @@ N-DONE number of done entries.  N-NOT-DONE number of entries not done."
    (sql . nil)
    (sqlite . nil)))
 
+;; last day of the month
+(defun diary-last-workday-of-month (date)
+  (let* ((dayname (calendar-day-of-week date))
+         (day (calendar-extract-day date))
+         (month (calendar-extract-month date))
+         (year (calendar-extract-year date))
+         (lastday (calendar-last-day-of-month month year))
+         (last-two-days-before-last-day (list (- lastday 2) (- lastday
+                                                               1))))
+    (or (and (= day lastday) (memq dayname '(1 2 3 4 5)))
+        (and (memq day last-two-days-before-last-day) (= dayname 5)))))
+
+;;; ORG-MODE:  * My Task
+;;;              SCHEDULED: <%%(diary-last-day-of-month date)>
+;;; DIARY:  %%(diary-last-day-of-month date) Last Day of the Month
+;;; See also:  (setq org-agenda-include-diary t)
+;;; (diary-last-day-of-month '(2 28 2017))
+(defun diary-last-day-of-month (date)
+  "Return `t` if DATE is the last day of the month."
+  (let* ((day (calendar-extract-day date))
+         (month (calendar-extract-month date))
+         (year (calendar-extract-year date))
+         (last-day-of-month
+          (calendar-last-day-of-month month year)))
+    (= day last-day-of-month)))
+
 ;;; as-org.el ends here
