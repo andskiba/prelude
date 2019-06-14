@@ -39,6 +39,13 @@
   (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
   (setq ledger-post-account-alignment-column 2))
 
+;; Editorconfig
+
+(use-package editorconfig
+
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 ;; Yasnippet
 
@@ -64,9 +71,12 @@
 
 ;; web-mode
 
-(setq-default web-mode-code-indent-offset 2)
-(setq-default web-mode-markup-indent-offset 2)
-(setq-default web-mode-css-indent-offset 2)
+(use-package web-mode
+  :mode (".*\\.ftl" . web-mode)
+  :config
+  (setq-default web-mode-code-indent-offset 2)
+  (setq-default web-mode-markup-indent-offset 2)
+  (setq-default web-mode-css-indent-offset 2))
 
 ;;; CSS modes
 
@@ -75,6 +85,17 @@
 ;;; JS mode
 
 (setq-default js-indent-level 2)
+
+;; jsx
+
+(use-package rjsx-mode
+  :ensure t
+  :mode ("\\(components\\|containers\\)\\/.*\\.js\\'" . rjsx-mode))
+
+
+(use-package prettier-js
+  :ensure t
+  :hook ((rjsx-mode js2-mode) . prettier-js-mode))
 
 ;; js2-mode
 
@@ -87,9 +108,23 @@
 
 (setq-default js2-basic-offset 2)
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (js2-imenu-extras-mode)
+
+;;; JSON
+
+(use-package json-mode
+  :ensure t
+  :init
+  (add-hook 'json-mode-hook
+            (lambda ()
+              (add-hook 'after-save-hook
+                        (lambda ()
+                          (when flycheck-current-errors
+                            (flycheck-list-errors)))
+                        nil
+                        'local))))
 
 ;;; Typescript
 
