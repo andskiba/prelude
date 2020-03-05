@@ -32,6 +32,10 @@
 (require 'epa-file)
 (epa-file-enable)
 
+;; Solidity
+
+(use-package solidity-mode)
+
 ;; Ledger
 
 (use-package ledger-mode
@@ -68,6 +72,10 @@
 ;; helm
 
 (setq-default helm-ff-skip-boring-files t)
+
+;; shell-script
+
+(setq sh-basic-offset 2)
 
 ;; web-mode
 
@@ -182,5 +190,25 @@
   (add-hook 'malabar-java-mode-hook 'flycheck-mode)
   (add-hook 'malabar-groovy-mode-hook 'flycheck-mode))
 
+
+(use-package meghanada
+  :init
+  (add-hook 'java-mode-hook
+            (lambda ()
+              ;; meghanada-mode on
+              (meghanada-mode t)
+              ;; enable telemetry
+              ;; (meghanada-telemetry-enable t)
+              (flycheck-mode +1)
+              (setq c-basic-offset 2)
+              ;; use code format
+              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+  (cond
+   ((eq system-type 'windows-nt)
+    (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
+    (setq meghanada-maven-path "mvn.cmd"))
+   (t
+    (setq meghanada-java-path "java")
+    (setq meghanada-maven-path "mvn"))))
 
 ;;; as-packages.el ends here
